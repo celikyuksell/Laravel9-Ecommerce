@@ -11,7 +11,5 @@ First Name : {{$fname}}
 Last Name: {{$lname}}
 <br>
 
-
-
 </body>
 </html>
