@@ -10,7 +10,8 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Category List</h1>
+                        <a href="/admin/category/create" class="btn btn-block bg-gradient-info" style="width: 200px">Add Category</a>
+
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -55,9 +56,10 @@
                             <td>{{$rs->description}} </td>
                             <td>{{$rs->image}} </td>
                             <td>{{$rs->status}} </td>
-                            <td><a href="/admin/category/edit{{$rs->id}}" class="btn btn-block btn-info btn-sm">Edit</a>  </td>
-                            <td><a href="/admin/category/delete{{$rs->id}}" class="btn btn-block btn-danger btn-sm">Delete</a>  </td>
-                            <td><a href="/admin/category/show{{$rs->id}}" class="btn btn-block btn-success btn-sm">Show</a>  </td>
+                            <td><a href="/admin/category/edit/{{$rs->id}}" class="btn btn-block btn-info btn-sm">Edit</a>  </td>
+                            <td><a href="/admin/category/destroy/{{$rs->id}}" class="btn btn-block btn-danger btn-sm"
+                                   onclick="return confirm('Deleting !! Are you sure ?')">Delete</a>  </td>
+                            <td><a href="/admin/category/show/{{$rs->id}}" class="btn btn-block btn-success btn-sm">Show</a>  </td>
                         </tr>
                         @endforeach
                         </tbody>
