@@ -76,7 +76,7 @@
                         <tr>
                         <tr>
                             <th>Detail Inf</th>
-                            <td>{{$data->detail}}</td>
+                            <td>{!! $data->detail !!}</td>
                         </tr>
                         <th>Image</th>
                         <td>     @if ($data->image)
