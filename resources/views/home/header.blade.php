@@ -39,7 +39,7 @@
             <div class="pull-left">
                 <!-- Logo -->
                 <div class="header-logo">
-                    <a class="logo" href="#">
+                    <a class="logo" href="{{route('home')}}">
                         <img src="{{asset('assets')}}/img/logo.png" alt="">
                     </a>
                 </div>

@@ -13,7 +13,7 @@
                         <div class="banner-caption text-center">
                             <h1>{{$rs->title}}</h1>
                             <h3 class="white-color font-weak">Up to 50% Discount</h3>
-                            <button class="primary-btn">Shop Now</button>
+                            <a href="{{route('product',['id'=>$rs->id])}}" class="primary-btn">Shop Now</a>
                         </div>
                     </div>
             @endforeach

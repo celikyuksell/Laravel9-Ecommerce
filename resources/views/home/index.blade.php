@@ -1,6 +1,9 @@
 @extends('layouts.frontbase')
 
-@section('title', 'E Commerce Project')
+@section('title', $setting->title)
+@section('description', $setting->description)
+@section('keywords', $setting->keywords)
+@section('icon', Storage::url($setting->icon))
 
 @section('slider')
     @include('home.slider')
@@ -100,7 +103,7 @@
                                         <li><span>00 M</span></li>
                                         <li><span>00 S</span></li>
                                     </ul>
-                                    <button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</button>
+                                    <a href="{{route('product',['id'=>$rs->id])}}" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</a>
                                     <img src="{{Storage::url($rs->image)}}" style="height: 360px; width: 270px">
                                 </div>
                                 <div class="product-body">
