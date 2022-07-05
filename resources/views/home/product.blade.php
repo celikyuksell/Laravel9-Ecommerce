@@ -50,6 +50,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="product-body">
+                            @include('home.messages')
                             <div class="product-label">
                                 <span>New</span>
                                 <span class="sale">-20%</span>
@@ -57,14 +58,18 @@
                             <h2 class="product-name">{{$data->title}}</h2>
                             <h3 class="product-price">${{$data->price}} <del class="product-old-price">${{$data->price * 1.20}}</del></h3>
                             <div>
+                                @php
+                                    $average = $data->comment->average('rate');
+                                @endphp
+
                                 <div class="product-rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-o empty"></i>
+                                    <i class="fa fa-star @if ($average<1) -o empty @endif"></i>
+                                    <i class="fa fa-star @if ($average<2) -o empty @endif"></i>
+                                    <i class="fa fa-star @if ($average<3) -o empty @endif"></i>
+                                    <i class="fa fa-star @if ($average<4) -o empty @endif"></i>
+                                    <i class="fa fa-star @if ($average<5) -o empty @endif"></i>
                                 </div>
-                                <a href="#">3 Review(s) / Add Review</a>
+                                <a href="#"> {{$data->comment->count('id')}} /{{number_format($average,1)}}  Review(s) / Add Review</a>
                             </div>
                             <p><strong>Availability:</strong> In Stock</p>
                             <p><strong>Brand:</strong> E-SHOP</p>
@@ -86,11 +91,15 @@
                             </div>
 
                             <div class="product-btns">
-                                <div class="qty-input">
-                                    <span class="text-uppercase">QTY: </span>
-                                    <input class="input" type="number">
-                                </div>
-                                <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                <form action="{{route('shopcart.store')}}" method="post">
+                                    @csrf
+                                    <div class="qty-input">
+                                        <span class="text-uppercase">QTY: </span>
+                                        <input class="input" name="quantity" type="number" value="1" min="1" max="{{$data->quantity}}" >
+                                        <input class="input" name="id" value="{{$data->id}}" type="hidden">
+                                    </div>
+                                    <button type="submit" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                </form>
                                 <div class="pull-right">
                                     <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
                                     <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
@@ -103,7 +112,7 @@
                         <div class="product-tab">
                             <ul class="tab-nav">
                                 <li class="active"><a data-toggle="tab" href="#tab1">Details</a></li>
-                                <li><a data-toggle="tab" href="#tab2">Reviews (3)</a></li>
+                                <li><a data-toggle="tab" href="#tab2">Reviews ({{$data->comment->count('id')}})</a></li>
                             </ul>
                             <div class="tab-content">
                                 <div id="tab1" class="tab-pane fade in active">
@@ -114,59 +123,27 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="product-reviews">
-                                                <div class="single-review">
-                                                    <div class="review-heading">
-                                                        <div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
-                                                        <div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
-                                                        <div class="review-rating pull-right">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star-o empty"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="review-body">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-                                                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                                                    </div>
-                                                </div>
 
-                                                <div class="single-review">
-                                                    <div class="review-heading">
-                                                        <div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
-                                                        <div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
-                                                        <div class="review-rating pull-right">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star-o empty"></i>
+                                                @foreach($reviews as $rs)
+                                                    <div class="single-review">
+                                                        <div class="review-heading">
+                                                            <div><a href="#"> <i class="fa fa-user-o"></i> {{$rs->user->name}}</a> </div>
+                                                            <div><a href="#"><i class="fa fa-clock-o"></i> {{$rs->created_at}}</a></div>
+                                                            <div class="review-rating pull-right">
+                                                                <i class="fa fa-star @if ($rs->rate<1) -o empty @endif"></i>
+                                                                <i class="fa fa-star @if ($rs->rate<2) -o empty @endif"></i>
+                                                                <i class="fa fa-star @if ($rs->rate<3) -o empty @endif"></i>
+                                                                <i class="fa fa-star @if ($rs->rate<4) -o empty @endif"></i>
+                                                                <i class="fa fa-star @if ($rs->rate<5) -o empty @endif"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="review-body">
+                                                            <strong>{{$rs->subject}}</strong>
+                                                            <p>{{$rs->review}}</p>
                                                         </div>
                                                     </div>
-                                                    <div class="review-body">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-                                                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                                                    </div>
-                                                </div>
+                                                @endforeach
 
-                                                <div class="single-review">
-                                                    <div class="review-heading">
-                                                        <div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
-                                                        <div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
-                                                        <div class="review-rating pull-right">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star-o empty"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="review-body">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-                                                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                                                    </div>
-                                                </div>
 
                                                 <ul class="reviews-pages">
                                                     <li class="active">1</li>
@@ -179,30 +156,37 @@
                                         <div class="col-md-6">
                                             <h4 class="text-uppercase">Write Your Review</h4>
                                             <p>Your email address will not be published.</p>
-                                            <form class="review-form">
+
+                                            <form class="review-form" action="{{route('storecomment')}}" method="post">
+                                                @csrf
+                                                <input class="input" type="hidden" name="product_id" value="{{$data->id}}" />
                                                 <div class="form-group">
-                                                    <input class="input" type="text" placeholder="Your Name" />
+                                                    <input class="input" type="text" name="subject" placeholder="Subject" />
                                                 </div>
                                                 <div class="form-group">
-                                                    <input class="input" type="email" placeholder="Email Address" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <textarea class="input" placeholder="Your review"></textarea>
+                                                    <textarea class="input" name="review" placeholder="Your review"></textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="input-rating">
                                                         <strong class="text-uppercase">Your Rating: </strong>
                                                         <div class="stars">
-                                                            <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
-                                                            <input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
-                                                            <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
-                                                            <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
-                                                            <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
+                                                            <input type="radio" id="star5" name="rate" value="5" /><label for="star5"></label>
+                                                            <input type="radio" id="star4" name="rate" value="4" /><label for="star4"></label>
+                                                            <input type="radio" id="star3" name="rate" value="3" /><label for="star3"></label>
+                                                            <input type="radio" id="star2" name="rate" value="2" /><label for="star2"></label>
+                                                            <input type="radio" id="star1" name="rate" value="1" /><label for="star1"></label>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button class="primary-btn">Submit</button>
+                                                @auth
+                                                    <button class="primary-btn">Submit</button>
+                                                @else
+                                                    <a href="/login" class="primary-btn"> For Submit Your Review, Please Login  </a>
+                                                @endauth
+
                                             </form>
+
+
                                         </div>
                                     </div>
 

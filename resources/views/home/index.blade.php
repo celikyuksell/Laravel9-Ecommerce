@@ -108,18 +108,23 @@
                                 </div>
                                 <div class="product-body">
                                     <h3 class="product-price">{{$rs->price}} <del class="product-old-price">{{$rs->price * 1.10}} </del></h3>
+                                    @php
+                                        $average = $rs->comment->average('rate');
+                                    @endphp
                                     <div class="product-rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o empty"></i>
+                                        <i class="fa fa-star @if ($average<1) -o empty @endif"></i>
+                                        <i class="fa fa-star @if ($average<2) -o empty @endif"></i>
+                                        <i class="fa fa-star @if ($average<3) -o empty @endif"></i>
+                                        <i class="fa fa-star @if ($average<4) -o empty @endif"></i>
+                                        <i class="fa fa-star @if ($average<5) -o empty @endif"></i>
+                                        ({{$rs->comment->count('id')}})
                                     </div>
+
                                     <h2 class="product-name"><a href="#">{{$rs->title}}</a></h2>
                                     <div class="product-btns">
                                         <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
                                         <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-                                        <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                        <a href="{{route('shopcart.add',['id'=>$rs->id])}}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
                                     </div>
                                 </div>
                             </div>
