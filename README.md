@@ -1,70 +1,74 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Laravel 9 E‑Commerce
 
-## About Laravel
+An e‑commerce platform built with **Laravel 9**, featuring a modern storefront, admin panel, and accompanying YouTube video series.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🎥 Video Tutorial (English)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Follow the full walkthrough via YouTube playlist:  
+https://www.youtube.com/playlist?list=PLIUezwWmVtFWEsExpVODS0NhbeWxjxVta
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🌟 Features
 
-## Learning Laravel
+- 🛍️ Product listing with search, filter, and pagination  
+- 🧑‍💻 Shopping cart and checkout integration  
+- 🔐 User authentication & registration  
+- ⚙️ Admin dashboard: product, category & order management  
+- 🌐 Multi-language support (if included—adjust as needed)  
+- 💵 Optional: Stripe / PayPal integration (if available)  
+- Modern layouts using Blade templating + Tailwind CSS
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🛠️ Tech Stack
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Laravel 9 framework  
+- PHP 8.x  
+- Blade & Tailwind CSS  
+- MySQL / MariaDB (configured via `.env`)  
+- Laravel features: Eloquent, Middleware, Policies, Validation  
+- Webpack mix for asset compilation
 
-## Laravel Sponsors
+## 🚀 Installation
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/celikyuksell/Laravel9-Ecommerce.git
+   cd Laravel9-Ecommerce
+   ```
+2. **Install PHP dependencies**
+   ```bash
+   composer install
+   ```
+3. **Install front-end dependencies**
+   ```bash
+   npm install
+   ```
+4. **Configure environment**
+   Copy `.env.example` to `.env` and update:
+   ```dotenv
+   DB_CONNECTION=mysql
+   DB_DATABASE=your_db
+   DB_USERNAME=your_user
+   DB_PASSWORD=your_pass
+   ```
+5. **Generate application key**
+   ```bash
+   php artisan key:generate
+   ```
+6. **Run migrations**
+   ```bash
+   php artisan migrate
+   ```
+7. **Compile assets**
+   ```bash
+   npm run dev
+   ```
+8. **Run the local server**
+   ```bash
+   php artisan serve
+   ```
+   Open: [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
-### Premium Partners
+## 👤 Author
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-"# Laravel9-Ecommerce" 
-"# Laravel9Test" 
-"# Laravel9" 
-"# Laravel9-Ecommerce" 
-"# Laravel9-Ecommerce" 
-"# Laravel9-Ecommerce" 
+Created by **Yuksel Celik** ([@celikyuksell](https://github.com/celikyuksell)).  
+Watch the full tutorial at: https://www.youtube.com/c/YukselCELIK
